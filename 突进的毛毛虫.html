@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>突击的毛毛虫</title>
+    <style>
+        body {
+            width: 1300px;
+            height: 600px;
+        }
+
+        ul {
+            width: 1300px;
+            height: 600px;
+            position: relative;
+            display: block;
+            background: url(img/caodi1.png) no-repeat;
+            background-size: 1300px 600px; 
+        }
+
+        .li {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            top: 0px;
+            float: left;
+            transition: .5s;
+            list-style: none;
+            border-radius: 50%;
+        }
+
+        .p {
+            border-top-left-radius: 75%;
+            border-bottom-right-radius: 75%;
+            width: 20px;
+            height: 20px;
+            background: red;
+            margin-left: 25px;
+            margin-top: 10px;
+            transform: rotate(45deg);
+            position: relative;
+        }
+
+        .p1 {
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            background: #000;
+            position: absolute;
+            top: -14px;
+            left: 8px;
+        }
+
+        .div {
+            border-top-left-radius: 75%;
+            border-bottom-right-radius: 75%;
+            width: 13px;
+            height: 6px;
+            border: solid 2px;
+            border-color: transparent black black transparent;
+            margin-left: 25px;
+            margin-top: 10px;
+            transform: rotate(45deg);
+            position: relative;
+            position: absolute;
+            top: 23px;
+            left: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul"></ul>
+    <script>
+        let a
+        for (let i = 0; i < 25; i++) {
+            let li = document.createElement('li')
+            li.setAttribute('class', 'li')
+            li.setAttribute('style', `left : ${i * 50}px`)
+            if (i === 24) {
+                li.style.background = 'rgb(0,255,255,.5)'
+                li.innerHTML = `<div class = "p"><p class="p1"></p></div><div class="div"></div>`
+            } else if (i % 2) {
+                li.style.background = 'rgb(0,0,255,0.5)'
+            } else {
+                li.style.background = 'rgb(255,255,255,.5)'
+            }
+            a = function () {
+                if (li.style.top == '300px') {
+                    li.style.top = '150px'
+                    le(li, '150px')
+                    lef(li, '150px')
+                } else {
+                    li.style.top = '300px'
+                    le(li, '300px')
+                    lef(li, '300px')
+                }
+            }
+            ul.appendChild(li)
+        }
+        function le(li, a) {
+            if (li.previousElementSibling) {
+                setTimeout(() => {
+                    li.previousElementSibling.style.top = a
+                    le(li.previousElementSibling, a)
+                }, 50)
+            }
+        }
+        function lef(li, a) {
+            if (li.nextElementSibling) {
+                setTimeout(() => {
+                    li.nextElementSibling.style.top = a
+                    lef(li.nextElementSibling, a)
+                }, 50)
+            }
+        }
+        setInterval(() => {
+            a()
+        }, 300);
+
+
+    </script>
+</body>
+
+</html>
